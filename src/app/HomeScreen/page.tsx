@@ -3,7 +3,15 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { ChevronDown, ChevronRight, RefreshCcw, X, Copy } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronRight,
+  RefreshCcw,
+  X,
+  Copy,
+  Eye,
+  EyeOff,
+} from "lucide-react";
 
 export default function HomeScreen() {
   const [showBalance, setShowBalance] = useState(false);
@@ -39,7 +47,19 @@ export default function HomeScreen() {
       {/* Balance */}
       <div className="mb-6">
         <p className="text-sm font-medium text-black">Current Balance</p>
-        <p className="text-2xl font-bold text-black">₦0.000</p>
+
+        <div className="flex items-center gap-2">
+          <p className="text-2xl font-bold text-black">
+            {showBalance ? "₦ 0.000" : "****"}
+          </p>
+          <button onClick={() => setShowBalance(!showBalance)} className="p-1">
+            {showBalance ? (
+              <EyeOff size={20} className="text-black" />
+            ) : (
+              <Eye size={20} className="text-black" />
+            )}
+          </button>
+        </div>
       </div>
 
       {/* Action Card */}
@@ -47,7 +67,9 @@ export default function HomeScreen() {
         <div className="border-[10px] border-yellow-400/50 rounded-2xl">
           <div className="flex items-center justify-between bg-yellow-400 rounded-lg p-4">
             <div>
-              <p className="text-lg font-semibold mb-2">Make it Rain!</p>
+              <p className="text-lg font-semibold mb-2 text-black">
+                Make it Rain!
+              </p>
               <div className="flex gap-3">
                 <button
                   onClick={() => setSprayModalVisible(true)}
@@ -85,8 +107,8 @@ export default function HomeScreen() {
               key={amt}
               className="border border-gray-300 rounded-lg py-3 flex flex-col items-center hover:bg-gray-200"
             >
-              <span className="font-bold">{amt}</span>
-              <span className="text-xs">1 Note</span>
+              <span className="font-bold text-black ">{amt}</span>
+              <span className="text-xs text-black">1 Note</span>
             </div>
           ))}
         </div>
@@ -96,40 +118,44 @@ export default function HomeScreen() {
       <div className="bg-white border border-gray-300/50 rounded-lg p-4 mb-6">
         <div className="flex items-center justify-between">
           <p className="font-semibold text-black">Last Transaction</p>
-          <ChevronDown size={18} />
+          <ChevronDown size={18} className="text-black" />
         </div>
       </div>
 
       {/* Spray Modal */}
       {sprayModalVisible && (
         <div className="fixed inset-0 bg-black/40 flex items-end">
-          <div className="bg-white w-full rounded-t-2xl p-5">
+          <div className="bg-white w-full rounded-t-2xl max-w-sm mx-auto p-5">
             <div className="flex items-center justify-between mb-4">
-              <p className="font-semibold">Control your spraying order</p>
+              <p className="font-semibold text-black">
+                Control your spraying order
+              </p>
               <button
                 onClick={() => setSprayModalVisible(false)}
-                className="flex items-center gap-1 bg-gray-200 px-3 py-1 rounded"
+                className="flex items-center gap-1 bg-gray-200 px-3 py-1 rounded text-black"
               >
-                <RefreshCcw size={16} /> Reset
+                <RefreshCcw size={16} className="text-black font-bold" /> Reset
               </button>
             </div>
             <div className="space-y-4">
               <div>
-                <p className="text-sm font-medium mb-1">Select Notes</p>
+                <p className="text-sm font-medium mb-1 text-black">
+                  Select Notes
+                </p>
                 <input
                   placeholder="Enter note"
-                  className="w-full rounded bg-gray-100 px-3 py-2"
+                  className="w-full rounded bg-[#F5F5F0] px-3 py-2 text-black placeholder-[#8A8261]"
                 />
               </div>
               <div>
-                <p className="text-sm font-medium mb-1">Amount</p>
+                <p className="text-sm font-medium mb-1 text-black">Amount</p>
                 <input
                   placeholder="#190000"
-                  className="w-full rounded bg-gray-100 px-3 py-2"
+                  className="w-full rounded bg-[#F5F5F0] px-3 py-2 text-black placeholder-[#8A8261]"
                 />
               </div>
             </div>
-            <button className="w-full bg-yellow-400 rounded py-3 mt-4 font-semibold">
+            <button className="w-full bg-yellow-400 rounded py-3 mt-4 font-semibold text-black">
               Spray
             </button>
           </div>
@@ -139,26 +165,26 @@ export default function HomeScreen() {
       {/* Deposit Modal */}
       {depositModalVisible && (
         <div className="fixed inset-0 bg-black/40 flex items-end">
-          <div className="bg-white w-full rounded-t-2xl p-5">
+          <div className="bg-white w-full rounded-t-2xl p-5 max-w-sm mx-auto">
             {!showBankTransfer ? (
               <>
                 <div className="flex items-center justify-between mb-4">
-                  <p className="font-semibold">Deposit Details</p>
+                  <p className="font-semibold text-black">Deposit Details</p>
                   <button onClick={() => setDepositModalVisible(false)}>
-                    <X size={22} />
+                    <X size={22} className="text-black" />
                   </button>
                 </div>
                 <div className="space-y-4">
                   <input
                     placeholder="#100,000"
-                    className="w-full rounded bg-gray-100 px-3 py-2"
+                    className="w-full rounded bg-[#F5F5F0] px-3 py-2 placeholder-[#8A8261] text-black"
                   />
                   <input
                     placeholder="100 Notes"
-                    className="w-full rounded bg-gray-100 px-3 py-2"
+                    className="w-full rounded bg-[#F5F5F0] px-3 py-2 placeholder-[#8A8261] text-black"
                   />
                   <button
-                    className="w-full bg-yellow-400 rounded py-3 font-semibold"
+                    className="w-full bg-yellow-400 rounded py-3 font-semibold text-black"
                     onClick={() => setShowBankTransfer(true)}
                   >
                     Proceed with Bank
@@ -168,12 +194,12 @@ export default function HomeScreen() {
             ) : (
               <>
                 <div className="flex items-center justify-between mb-4">
-                  <p className="font-semibold">Deposit Details</p>
+                  <p className="font-semibold text-black">Deposit Details</p>
                   <button onClick={() => setDepositModalVisible(false)}>
-                    <X size={22} />
+                    <X size={22} className="text-black" />
                   </button>
                 </div>
-                <p className="mb-3 text-sm">
+                <p className="mb-3 text-sm text-black">
                   Transfer to the account showing below
                 </p>
                 <div className="border p-4 rounded relative mb-4">
@@ -181,22 +207,24 @@ export default function HomeScreen() {
                     {seconds}
                   </div>
                   <div className="flex justify-between mb-2">
-                    <span className="font-medium">Payment Method</span>
-                    <span>Bank Transfer</span>
+                    <span className="font-medium text-black">
+                      Payment Method
+                    </span>
+                    <span className="text-black">Bank Transfer</span>
                   </div>
                   <div className="border-t my-1" />
                   <div className="flex justify-between mb-2">
-                    <span className="text-xs bg-gray-100 px-2 rounded">
+                    <span className="text-xs bg-gray-100 px-2 rounded text-black">
                       Name
                     </span>
-                    <span>MONEY SPRAYING</span>
+                    <span className="text-black">MONEY SPRAYING</span>
                   </div>
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-xs bg-gray-100 px-2 rounded">
+                    <span className="text-xs bg-gray-100 px-2 rounded text-black">
                       Bank Account
                     </span>
                     <div className="flex items-center gap-2">
-                      <span>0872712892</span>
+                      <span className="text-black">0872712892</span>
                       <button
                         onClick={() => {
                           navigator.clipboard.writeText("0872712892");
@@ -215,17 +243,17 @@ export default function HomeScreen() {
                   )}
                   <div className="border-t my-1" />
                   <div className="flex justify-between">
-                    <span className="text-xs bg-gray-100 px-2 rounded">
+                    <span className="text-xs bg-gray-100 px-2 rounded text-black">
                       Bank Name
                     </span>
-                    <span>Providus Cash Bank</span>
+                    <span className="text-black">Providus Cash Bank</span>
                   </div>
                 </div>
                 <input
                   placeholder="Amount Entered"
-                  className="w-full rounded bg-gray-100 px-3 py-2 mb-4"
+                  className="w-full rounded bg-[#F5F5F0] px-3 py-2 mb-4 text-black placeholder-[#8A8261]"
                 />
-                <div className="flex items-start gap-2 bg-yellow-100 rounded p-3 mb-4">
+                <div className="flex items-start gap-2 bg-[#F2C42126] rounded p-3 mb-4">
                   <Image
                     src="/icons/warning.png"
                     alt="warning"
@@ -237,7 +265,7 @@ export default function HomeScreen() {
                     above, and also ensure to deposit before the time runs out
                   </p>
                 </div>
-                <button className="w-full bg-yellow-400 rounded py-3 font-semibold">
+                <button className="w-full bg-yellow-400 rounded py-3 font-semibold text-black">
                   Click here after transfer
                 </button>
               </>

@@ -22,11 +22,11 @@ export default function ScanNow() {
           />
 
           {/* Overlay image (centered on top) */}
-          <div className="absolute inset-0 flex items-center justify-center">
+          <div className="absolute inset-0 flex items-center justify-center top-10">
             <Image
               src="/images/scanphone.png"
               alt="Scan phone"
-              width={150}
+              width={250}
               height={150}
               className="object-contain"
             />
