@@ -37,7 +37,7 @@ export default function QrPage() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-white px-5 md:hidden">
       <QRCodeCanvas
-        value={`https://manilla.finance/connect?session=${token}`}
+        value={`https://money-spraying-web-bwv7.vercel.app/session/${token}`}
         size={220}
         bgColor="#ffffff"
         fgColor="#000000"
