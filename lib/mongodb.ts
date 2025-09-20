@@ -10,15 +10,21 @@ if (!process.env.MONGODB_URI) {
   throw new Error("Please add your Mongo URI to .env.local");
 }
 
+// Extend Node's global type so we can attach _mongoClientPromise
+declare global {
+  // eslint-disable-next-line no-var
+  var _mongoClientPromise: Promise<MongoClient> | undefined;
+}
+
 if (process.env.NODE_ENV === "development") {
-  // reuse client in dev
-  if (!(global as any)._mongoClientPromise) {
+  // Reuse client in dev
+  if (!global._mongoClientPromise) {
     client = new MongoClient(uri, options);
-    (global as any)._mongoClientPromise = client.connect();
+    global._mongoClientPromise = client.connect();
   }
-  clientPromise = (global as any)._mongoClientPromise;
+  clientPromise = global._mongoClientPromise;
 } else {
-  // new client in prod
+  // New client in prod
   client = new MongoClient(uri, options);
   clientPromise = client.connect();
 }
