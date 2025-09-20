@@ -23,12 +23,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="h-screen overflow-hidden">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased flex justify-center bg-gray-100`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased flex justify-center bg-gray-100 h-screen overflow-hidden`}
       >
         {/* 📱 Mobile-only container */}
-        <div className="w-[375px] min-h-screen bg-white shadow-lg">
+        <div className="w-[375px] h-screen bg-white shadow-lg overflow-hidden">
           {children}
         </div>
       </body>
